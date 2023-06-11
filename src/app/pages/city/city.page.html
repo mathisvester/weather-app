@@ -1,22 +1,35 @@
 <ion-content [fullscreen]="true" id="content">
-
-  <div class="city__options">
+  <div class="city__options" *ngIf="city$ | async as city">
     <ion-button fill="clear" (click)="goBack()">
-        <ion-icon name="chevron-back-outline"></ion-icon>
+      <ion-icon name="chevron-back-outline"></ion-icon>
     </ion-button>
-    
-    <ion-button color="light" (click)="addToList()" *ngIf="!isCityStored">
+
+    <ion-button color="light" (click)="addCity$.next(city)" *ngIf="(isCityStored$ | async) === false">
       Add to list
       <ion-icon slot="end" name="add-circle-outline"></ion-icon>
     </ion-button>
-    
-    <ion-button color="light" (click)="removeFromTheList()" *ngIf="isCityStored">
+
+    <ion-button color="light" (click)="removeCity$.next(city)" *ngIf="isCityStored$ | async">
       Remove
       <ion-icon slot="end" name="close-circle-outline"></ion-icon>
     </ion-button>
   </div>
 
-  <app-weather-forecast *ngIf="city" [city]="city">
+  <app-weather-forecast *ngIf="city$ | async as city" [city]="city">
   </app-weather-forecast>
 
+  <app-toast [show]="(error$ | async)!"
+             [message]="'Connection lost!. Check your internet connection or try again later'"
+             [duration]="2000"
+             [mode]="'warning'"></app-toast>
+
+  <app-toast [show]="(addSuccessful$ | async)!"
+             [message]="'The city has been saved!'"
+             [duration]="2000"
+             [mode]="'success'"></app-toast>
+
+  <app-toast [show]="(removeSuccessful$ | async)!"
+             [message]="'The city has been removed!'"
+             [duration]="2000"
+             [mode]="'success'"></app-toast>
 </ion-content>

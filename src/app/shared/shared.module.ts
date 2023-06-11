@@ -14,6 +14,7 @@ import { LoaderComponent } from '../components/loader/loader.component';
 import { TemperatureConverterPipe } from './pipes/temperature-converter/temperature-converter.pipe';
 import { CityWeatherCardComponent } from '../components/city-weather-card/city-weather-card.component';
 import { SpeedConverterPipe } from './pipes/speed-converter/speed-converter.pipe';
+import { ToastComponent } from '../components/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SpeedConverterPipe } from './pipes/speed-converter/speed-converter.pipe
     SlideIndicatorComponent,
     TemperatureConverterPipe,
     SpeedConverterPipe,
+    ToastComponent
   ],
   exports: [
     LoaderComponent,
@@ -38,7 +40,8 @@ import { SpeedConverterPipe } from './pipes/speed-converter/speed-converter.pipe
     WeatherDetailsCardComponent,
     CityWeatherCardComponent,
     TemperatureScaleSwitchComponent,
-    SlideIndicatorComponent
+    SlideIndicatorComponent,
+    ToastComponent
   ],
   imports: [
     CommonModule,
